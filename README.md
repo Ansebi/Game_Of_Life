@@ -1,2 +1,2 @@
-# Game_Of_Live
+# Game_Of_Life
 AI-based Game Of Life prediction project with Sukiboo
