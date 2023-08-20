@@ -1,0 +1,1300 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai24}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+%
+% These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%
+% These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
+\lstset{%
+	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+%
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2024.1)
+}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+%\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+
+
+% DISALLOWED PACKAGES
+% \usepackage{authblk} -- This package is specifically forbidden
+% \usepackage{balance} -- This package is specifically forbidden
+% \usepackage{color (if used in text)
+% \usepackage{CJK} -- This package is specifically forbidden
+% \usepackage{float} -- This package is specifically forbidden
+% \usepackage{flushend} -- This package is specifically forbidden
+% \usepackage{fontenc} -- This package is specifically forbidden
+% \usepackage{fullpage} -- This package is specifically forbidden
+% \usepackage{geometry} -- This package is specifically forbidden
+% \usepackage{grffile} -- This package is specifically forbidden
+% \usepackage{hyperref} -- This package is specifically forbidden
+% \usepackage{navigator} -- This package is specifically forbidden
+% (or any other package that embeds links such as navigator or hyperref)
+% \indentfirst} -- This package is specifically forbidden
+% \layout} -- This package is specifically forbidden
+% \multicol} -- This package is specifically forbidden
+% \nameref} -- This package is specifically forbidden
+% \usepackage{savetrees} -- This package is specifically forbidden
+% \usepackage{setspace} -- This package is specifically forbidden
+% \usepackage{stfloats} -- This package is specifically forbidden
+% \usepackage{tabu} -- This package is specifically forbidden
+% \usepackage{titlesec} -- This package is specifically forbidden
+% \usepackage{tocbibind} -- This package is specifically forbidden
+% \usepackage{ulem} -- This package is specifically forbidden
+% \usepackage{wrapfig} -- This package is specifically forbidden
+
+% DISALLOWED COMMANDS
+% \nocopyright -- Your paper will not be published if you use this command
+% \addtolength -- This command may not be used
+% \balance -- This command may not be used
+% \baselinestretch -- Your paper will not be published if you use this command
+% \clearpage -- No page breaks of any kind may be used for the final version of your paper
+% \columnsep -- This command may not be used
+% \newpage -- No page breaks of any kind may be used for the final version of your paper
+% \pagebreak -- No page breaks of any kind may be used for the final version of your paperr
+% \pagestyle -- This command may not be used
+% \tiny -- This is not an acceptable font size.
+% \vspace{- -- No negative value may be used in proximity of a caption, figure, table, section, subsection, subsubsection, or reference
+% \vskip{- -- No negative value may be used to alter spacing above or below a caption, figure, table, section, subsection, subsubsection, or reference
+
+
+\setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
+
+% The file aaai24.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+
+\newcommand{\clr}[1]{\textcolor{Aquamarine}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+% Your title must be in mixed case, not sentence case.
+% That means all verbs (including short verbs like be, is, using,and go),
+% nouns, adverbs, adjectives should be capitalized, including both words in hyphenated terms, while
+% articles, conjunctions, and prepositions are lower case unless they
+% directly follow a colon or long dash
+\title{Data-Centric Approach to Constrained Machine Learning:\\A Case Study on Conway's Game of Life}
+\author{
+    Anton Bibin\textsuperscript{\rm 1},
+    Anton Dereventsov\textsuperscript{\rm 2}
+}
+\affiliations {
+    \textsuperscript{\rm 1}Skoltech Agro, Skoltech, Moscow, Russia
+    \\
+    \textsuperscript{\rm 2}Behavioral Reinforcement Learning Lab, Lirio LLC, Knoxville, TN, USA
+    \\
+    a.bibin@skoltech.ru, adereventsov@lirio.com
+}
+\maketitle
+
+\begin{abstract}
+This paper focuses on a data-centric approach to machine learning applications in the context of Conway's Game of Life.
+Specifically, we consider the task of training a minimal architecture network to learn the multi-step Game of Life, which is known to be challenging due to restrictions on the allowed number of trainable parameters.
+An extensive quantitative analysis showcases the benefits of utilizing a strategically designed training dataset, with its advantages persisting regardless of other parameters of the learning configuration (such as network initialization or optimization algorithm).
+Importantly, our findings highlight the integral role of domain expert insights in creating effective machine learning applications for constrained real-world scenarios.
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+In this work we consider the problem of learning the rules of Conway's Game of Life, posed as an image-to-image translation task.
+Such a setting is inspired by~\cite{springer2021s}, where the authors investigate the ability of neural networks to learn the rules of Conway's Game of Life from the given state transition images.
+The authors have observed that such a task is often not achievable by conventional machine learning approaches and is only attainable under a sufficient network overparameterization (about $5-10$ times for a successful $1$- or $2$-step prediction).
+We restrict the setting by only working with minimally sufficient architectures and do not allow network overparameterization, which effectively puts us in a domain of \textit{constrained machine learning}.
+To offset the lack of usual machine learning leniency, we allow for meticulous control of the training data.
+Specifically, we design a training board and compare the efficiency of training neural networks on this constructed board, rather than learning on randomly generated boards.
+We observe that even a single properly-crafted training board offers a significant increase in convergence rate and speed, especially on more challenging multi-step prediction tasks, regardless of the choice of a network initialization and an optimization algorithm.
+We use this observation to highlight the vital importance of the training data in constrained settings, which is well-aligned with the increasingly prominent concept of \textit{data-centric machine learning}.
+We believe that this example can be easily translated to many real-world applications where machine learning approaches are restricted by the practical constraints like ethical, legal, security, or hardware limitations.
+Our contributions are the following:
+\begin{itemize}
+    \item Develop multiple ways of representing the Game of Life as a neural network with minimal architecture;
+    \item Explain the process of constructing the training data by analyzing the environment;
+    \item Demonstrate the significance of the training data choice via an extensive qualitative analysis;
+    \item Establish a simple yet challenging task that can be used by practitioners as a benchmark.
+\end{itemize}
+
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{.32\linewidth}
+        \includegraphics[width=\linewidth]{./images/gol_state_0.png}
+        \caption{State at time 0}
+    \end{subfigure}
+    \begin{subfigure}{.32\linewidth}
+        \includegraphics[width=\linewidth]{./images/gol_state_1.png}
+        \caption{State at time 1}
+    \end{subfigure}
+    \begin{subfigure}{.32\linewidth}
+        \includegraphics[width=\linewidth]{./images/gol_state_2.png}
+        \caption{State at time 2}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.32\linewidth}
+        \includegraphics[width=\linewidth]{./images/gol_state_3.png}
+        \caption{State at time 3}
+    \end{subfigure}
+    \begin{subfigure}{.32\linewidth}
+        \includegraphics[width=\linewidth]{./images/gol_state_4.png}
+        \caption{State at time 4}
+    \end{subfigure}
+    \begin{subfigure}{.32\linewidth}
+        \includegraphics[width=\linewidth]{./images/gol_state_5.png}
+        \caption{State at time 5}
+    \end{subfigure}
+    \caption{An example of a state trajectory in the Game of Life.
+             Alive cells are white and dead cells are black.}
+    \label{fig:gol_states}
+\end{figure}
+
+
+\subsubsection{Conway's Game of Life.}
+Game of Life is a classic cellular automaton devised by British mathematician John Conway in 1970.
+Operating on a two-dimensional grid of cells, each cell can exist in one of two states: alive or dead.
+The evolution of the system is solely determined by a set of rules that dictate the birth, survival, or death of cells based on their neighboring configurations, see Figure~\ref{fig:gol_states}.
+Despite its apparent simplicity, Conway's Game of Life remains of significant interest in the fields of mathematics and machine learning due to its inherent complexity and some peculiar applications, see e.g.~\cite{rennard2002implementation, rendell2011universal}.
+
+Conway's Game of Life serves as a computational model that explores how simple rules can lead to intricate and unpredictable patterns. 
+This has led to various studies focusing on the mathematical properties of the Game of Life, including the classification and analysis of different types of structures and behaviors that emerge within the system~\cite{adamatzky2010game, hirte2022john}.
+Moreover, it has been utilized as a platform for developing and testing various types of neural networks and deep learning architectures, with the goal of understanding how these models can learn to simulate and predict the evolution of the system, see e.g.~\cite{krechetov2021game, grattarola2021learning}.
+
+%The Game of Life's patterns display a range of behaviors, with some evolving into stable structures, oscillators, and spaceships, while others exhibit chaotic tendencies before settling into combinations of these stable forms.
+%However, learning the Game of Life proves to be a complicated task due to its undecidability.
+%This means that no algorithm exists to determine if a later pattern will ever appear from a given initial pattern.
+%Being Turing-complete, the Game of Life's undecidability stems from its ability to simulate any Turing machine, establishing a connection to the halting problem—a classic computational challenge.
+%Consequently, predicting the system's long-term behavior or achieving specific outcomes becomes practically impossible, requiring researchers to rely on computational simulations and heuristics to explore its diverse behaviors effectively.
+
+In this work we explore the role of the training data on a task of learning the multi-step Game of Life with the minimal conventional architecture.
+Specifically, we use a convolutional neural network (CNN) to learn the rules of the game and predict the next state of the board.
+Training on our custom-made board outperforms the traditional paradigm in terms of accuracy and speed, and showcases the advantage of a data-centric approach in constrained machine learning applications.
+
+
+\subsubsection{Constrained Machine Learning.}
+In recent years, machine learning has emerged as a transformative technology with applications spanning diverse domains, from natural language processing and computer vision to healthcare and finance.
+However, traditional machine learning algorithms often overlook the incorporation of critical constraints, which are paramount for ensuring ethical, reliable, and safe decision-making in real-world applications.
+Constrained machine learning has emerged as a powerful paradigm that addresses this pressing concern, encompassing a variety of techniques that integrate explicit constraints into the learning process, see e.g.~\cite{perez2021constrained, yao2021power, gori2023machine}.
+These restrictions can be given as mathematical expressions, rules, or logical statements, and are typically derived from prior knowledge about the problem domain.
+
+Constrained machine learning offers an immense potential in tackling complex challenges across various domains, such as healthcare~\cite{ahmad2018interpretable, chen2021ethical, nguyen2021budget}, autonomous vehicles~\cite{gonzalez2015review, dalal2018safe}, finance~\cite{bae2022constrained, al2022optimization}, and natural language processing~\cite{ammanabrolu2020graph, yang2021safe, zhang2022survey}.
+
+% Constrained machine learning offers an immense potential in tackling complex challenges across various domains, such as
+% \begin{itemize}
+%     \item Healthcare: Utilizing patient-specific constraints to optimize treatment plans, drug dosages, and diagnostic decisions while maintaining individual patient safety and privacy, see e.g.~\cite{ahmad2018interpretable, chen2021ethical, nguyen2021budget};
+%     \item Autonomous Vehicles: Incorporating safety-related constraints to ensure collision avoidance, lane adherence, and compliance with traffic regulations in self-driving cars, see e.g.~\cite{gonzalez2015review, dalal2018safe};
+%     \item Finance: Implementing constraints to manage investment portfolios, risk assessment, and fraud detection with a focus on regulatory compliance and economic stability, see e.g.~\cite{bae2022constrained, al2022optimization};
+%     \item Natural Language Processing: Integrating linguistic constraints for improved sentiment analysis, language translation, and content generation while respecting grammatical and semantic rules, see e.g.~\cite{ammanabrolu2020graph, yang2021safe, zhang2022survey}.
+% \end{itemize}
+
+It is important to note that incorporating additional constraints can increase the implementation, training, and deployment complexity of machine learning models.
+But despite the potential challenges, constrained machine learning offers a promising avenue for improving the behavior and performance of machine learning models in critical real-life applications.
+
+
+\subsubsection{Data-Centric Machine Learning.}
+Data-centric machine learning is an approach that prioritizes the quality, diversity, and relevance of data as a central focus in the training pipeline, as opposed to traditional machine learning where algorithms are often designed with a primary emphasis on model complexity and hyperparameter tuning.
+While these aspects remain important, data-centric machine learning recognizes that the quality and abundance of data available for training models can significantly impact their performance and generalization capabilities, see e.g.~\cite{pan2022data, majeed2023data}.
+%The concept of Data-Centric Machine Learning revolves around the notion that a well-curated, diverse, and representative dataset is vital for creating robust, accurate, and adaptable machine learning models.
+%By placing a strong emphasis on data acquisition, curation, and preprocessing, this approach empowers models to excel in various domains, yielding more accurate predictions and fostering groundbreaking advancements in artificial intelligence.
+Data-centric machine learning finds application in numerous real-world scenarios across various industries, including healthcare~\cite{zahid2021systematic, emmert2022digital, dritsas2022data}, finance~\cite{liu2022finrl, horvatha2023harnessing}, and environmental sciences~\cite{devarajan2021dlio, li2022big}.
+
+Employing a data-centric approach poses several significant challenges that researchers and practitioners must address to achieve optimal results.
+Firstly, data quality and accessibility remain crucial hurdles, as obtaining large, diverse, and high-quality datasets can be costly and time-consuming~\cite{roh2019survey}.
+Dealing with imbalanced data, missing values, and noisy information requires careful preprocessing and augmentation techniques.
+Additionally, privacy and ethical concerns arise when handling sensitive data, demanding robust privacy preservation methods~\cite{jo2020lessons}.
+Finally, domain expert knowledge is required to evaluate the data relevance and accuracy.
+These insights are essential for interpreting the data in the appropriate context and guiding the preprocessing steps, ensuring that the data is suitable for training and validating machine learning models effectively~\cite{gennatas2020expert}.
+Addressing these challenges is paramount to harnessing the full potential of data-centric machine learning in real-world applications.
+For a comprehensive overview of data-centric machine learning we refer the reader to the works~\cite{anik2021data, miranda2021towards, seedat2022dc, zha2023data} and the references therein.
+
+
+\subsubsection{Related Work.}
+We chose Game of Life as a challenging environment that is complicated for conventional machine learning algorithms to learn.
+Such a setting is inspired by~\cite{springer2021s}, where the authors investigated how network overparameterization affects performance.
+In contrast, we only consider the minimal network architectures.
+%In this work we only consider the classical discrete formulation of Game of Life, however numerous other generalizations have been proposed and studied, see e.g.~\cite{adachi2004game, rafler2011generalization, aach2021generalization}.
+
+Training networks of the smallest feasible architecture is considered in~\cite{nye2018efficient}, where the authors observe the inability of learning the parity function and fast Fourier transform with the minimal networks.
+Research on the training of small networks is relevant, see e.g.~\cite{winoto2020small} where the authors consider slim networks for deployment on mobile devices.
+%Additionally, small, or even minimal, networks can be obtained by pruning, which is another prominent area of research, see e.g.~\cite{blalock2020state}.
+
+% We consider the setting of constrained machine learning, where the main constraint is the size of the network.
+% Depending on the application, researchers are interested in other practical constraints, such as the scarce amount of data~\cite{dereventsov2021offline, fu2021benchmarks}, skewed distribution of historical data~\cite{aslanides2017universal, bojun2020steady}, and other practical limitations~\cite{tennenholtz2020off, dulac2021challenges}.
+% Due to the restricted nature of our setting, we employ full-CNN networks to perform image-to-image translation.
+% However, more sophisticated techniques are available if the condition of minimal architecture is relaxed, see e.g.~\cite{isola2017image, murez2018image, pang2021image}.
+
+One of our main results demonstrates that even a single state observation could be sufficient to learn the Game of Life.
+Similar findings are presented in~\cite{motamedi2021data}, where the authors achieve high performance in an image classification task by removing a significant part of the training data and only keeping the highest quality images.
+The process of designing or creating training data itself is an actively developing area that has seen significant progress in different areas of machine learning, see e.g.~\cite{ratner2016data, abufadda2021survey}.
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=.8\linewidth]{./images/gol_model_1_step.pdf}
+    \caption{Minimal CNN architecture for the Game of Life network.}
+    \label{fig:gol_model_1_step}
+\end{figure*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Game of Life as a Neural Network}
+In the Game of Life, the state of the board changes each turn, depending on the current board configuration, according to the following rules:
+\begin{enumerate}
+    \item Any live cell with fewer than two live neighbors dies, as if by underpopulation.
+    \item Any live cell with two or three live neighbors lives on to the next generation.
+    \item Any live cell with more than three live neighbors dies, as if by overpopulation.
+    \item Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+\end{enumerate}
+
+Following the established convention, we represent a state of the board in Game of Life by a grayscale image, see Figure~\ref{fig:gol_states}, where a pixel value of $1$ indicates that the cell is alive and a value of $0$ indicates that the cell is dead.
+Thus at a time $t \ge 0$ the state is given as a binary matrix $s_t \in \mathbb{R}^{M \times N}$, where each value $c \in s_t$ represents the condition of a cell at time $t$ with $c = 1$ indicating that the cell is alive and $c = 0$ indicating that the cell is dead.
+Therefore the Game of Life transition can be viewed as an operator $\mathcal{G}: \mathbb{R}^{M \times N} \to \mathbb{R}^{M \times N}$ acting on the current state $s_t$ and outputting the next state $s_{t+1}$, i.e.
+\[
+    \mathcal{G}(s_t) = s_{t+1}.
+\]
+To establish a neural network representation of the operator $\mathcal{G}$, note that a single step $s_t \to s_{t+1}$ of Game of Life consists of transforming each cell $c \to c^\prime$ as
+\begin{equation}\label{eq:gol_rules}
+    c^\prime
+    = \left\{\begin{array}{rl}
+        1 & \text{if the $3 \times 3$ patch centered at $c$}
+            \\
+            & \text{has at least $2$ living cells and}
+            \\
+            & \text{$c$ has at most $3$ living neighbors},
+        \\
+        0 & \text{otherwise}.
+    \end{array}\right.
+\end{equation}
+Therefore in order to make a transition $s_t \to s_{t+1}$, for each cell $c$ one has to know two pieces of information: the condition of the cell $c$ itself and the conditions of the cells in the $3 \times 3$ patch centered at cell $c$.
+A conventional architecture that can efficiently extract this information with just a few trainable parameters is the \textit{Convolutional Neural Network}, see e.g.~\cite{goodfellow2016convolutional}.
+
+Indeed, the Game of Life operator $\mathcal{G}: \mathbb{R}^{M \times N} \to \mathbb{R}^{M \times N}$ can be represented as a 2-layer convolutional neural network with $23$ trainable parameters, see Figure~\ref{fig:gol_model_1_step}.
+Conceptually, the first layer contains two $3 \times 3$ filters, extracting the information on the number of alive neighbors and the condition of the cell itself.
+This layer can be followed by any reasonable activation function, so we consider ReLU and Tanh~--- the most popular choices among practitioners.
+The second layer combines these two features to make a prediction on the cell condition on the next step.
+Unlike the first layer, the choice of activation function here is more restrictive since the output of $\mathcal{G}$ should only consist of $0$ and $1$, regardless of the input.
+As such, we only consider the ReLU activation after the second layer.
+
+Below we provide two minimal configurations with conventional architectures that are capable of capturing the transition rules~\eqref{eq:gol_rules}.
+We note that while it is technically possible to construct a smaller network recreating the rules for Game of Life, it would require either a use of residual connections, unconventional layer structures, or activation functions, which is beyond the scope of the current work, and hence we only consider the fully-CNN architectures.
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=.8\linewidth]{./images/gol_model_recursive.pdf}
+    \caption{Minimal recursive CNN architecture for the multi-step Game of Life network.}
+    \label{fig:gol_model_recursive}
+\end{figure*}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=.8\linewidth]{./images/gol_model_sequential.pdf}
+    \caption{Minimal sequential CNN architecture for the multi-step Game of Life network.}
+    \label{fig:gol_model_sequential}
+\end{figure*}
+
+
+\subsubsection{ReLU Activation.}
+Consider a $2$-layer convolutional neural network with the ReLU activation after each layer:
+\[
+    s_t \ \to\ 
+    2\ \text{Conv2D}(3 \times 3) \ \xrightarrow{\text{ReLU}}\ 
+    1\ \text{Conv2D}(1 \times 1) \ \xrightarrow{\text{ReLU}}\ 
+    s_{t+1}
+\]
+The network consists of convolutional filters with the following weights and biases:
+\begin{align*}
+    W_{1,1} &= \begin{pmatrix}
+        1 & 1 & 1
+        \\
+        1 & 0 & 1
+        \\
+        1 & 1 & 1
+    \end{pmatrix}
+    &
+    b_{1,1} &= -3
+    \\
+    W_{1,2} &= \begin{pmatrix}
+        -1 & -1 & -1
+        \\
+        -1 & -1 & -1
+        \\
+        -1 & -1 & -1
+    \end{pmatrix}
+    &
+    b_{1,2} &= 3
+    \\
+    W_{2,1} &= \begin{pmatrix} -1 \\ -1 \end{pmatrix}
+    &
+    b_{2,1} &= 1
+\end{align*}
+where $W_{i,j}$ and $b_{i,j}$ are the $j$-th weights and bias of the $i$-th layer of the network.
+Note that for a state $s_t \in \mathbb{R}^{M \times N}$ we get the following output of the first layer:
+\begin{multline*}
+    \text{ReLU}(W_{1,1} s_t + b_{1,1})
+    = [c_{ij}^\prime]_{i=1,j=1}^{M,N}
+    \\
+    = \left\{\begin{array}{rl}
+        0 & \text{if $c_{ij}$ has $\le 3$ living neighbors,}
+        \\
+        > 0 & \text{otherwise.}
+    \end{array}\right.
+\end{multline*}
+\begin{multline*}
+    \text{ReLU}(W_{1,2} s + b_{1,2})
+    = [c_{ij}^\prime]_{i=1,j=1}^{M,N}
+    \\
+    = \left\{\begin{array}{rl}
+        0 & \text{if a $3 \times 3$ patch at $c_{ij}$ has $\ge 2$ living cells,}
+        \\
+        > 0 & \text{otherwise.}
+    \end{array}\right.
+\end{multline*}
+Therefore, after the second layer, the value of a cell $c^\prime$ of the output state $s_{t+1}$ is equal $1$ if a $3 \times 3$ patch centered at a cell $c$ has at least $2$ living cells and $c$ has at most $3$ living neighbors, or $0$ otherwise, which correspond to the Game of Life rules~\eqref{eq:gol_rules}.
+
+
+\subsubsection{Tanh Activation.}
+Consider a $2$-layer convolutional neural network with the Tanh activation after the first layer:
+\[
+    s_t \ \to\ 
+    2\ \text{Conv2D}(3 \times 3) \ \xrightarrow{\text{Tanh}}\ 
+    1\ \text{Conv2D}(1 \times 1) \ \xrightarrow{\text{ReLU}}\ 
+    s_{t+1}
+\]
+The network consists of convolutional filters with the following weights and biases:
+\begin{align*}
+    W_{1,1} &= \begin{pmatrix}
+        1 & 1 & 1
+        \\
+        1 & \nicefrac{3}{5} & 1
+        \\
+        1 & 1 & 1
+    \end{pmatrix}
+    &
+    b_{1,1} &= -2.4
+    \\
+    W_{1,2} &= \begin{pmatrix}
+        1 & 1 & 1
+        \\
+        1 & \nicefrac{2}{5} & 1
+        \\
+        1 & 1 & 1
+    \end{pmatrix}
+    &
+    b_{1,2} &= -3.6
+    \\
+    W_{2,1} &= \begin{pmatrix} 2 \\ -2 \end{pmatrix}
+    &
+    b_{2,1} &= -1
+\end{align*}
+where $W_{i,j}$ and $b_{i,j}$ are the $j$-th weights and bias of the $i$-th layer of the network.
+Then for any cell $c \in \{0;1\}$ with $n \in \{0,1,2,3,4,5,6,7,8\}$ alive neighbors the output of the second layer before the ReLU activation is the following:
+\begin{gather*}
+    \begin{array}{c|cc}
+        & c = 0 & c = 1
+        \\\hline
+        n = 0 & -0.9703 & -0.9002
+        \\
+        n = 1 & -0.7926 & -0.3766
+        \\
+        n = 2 & \phantom{-}0.0834 & \phantom{-}1.0621
+        \\
+        n = 3 & \phantom{-}1.1482 & \phantom{-}1.0621
+        \\
+        n = 4 & \phantom{-}0.0834 & -0.3766
+        \\
+        n = 5 & -0.7926 & -0.9002
+        \\
+        n = 6 & -0.9703 & -0.9862
+        \\
+        n = 7 & -0.9960 & -0.9981
+        \\
+        n = 8 & -0.9995 & -0.9997
+    \end{array}
+\end{gather*}
+Thus, after applying the ReLU activation and predicting the condition of a cell $c^\prime$, we obtain a transition corresponding to the Game of Life rules~\eqref{eq:gol_rules}.
+We note that while technically this network does not achieve zero loss, it is capable of reaching $100\%$ accuracy and is easier to train in practice, likely due to a more gradual feature transfer of the Tanh function.
+
+
+\subsubsection{Multi-step Game of Life.}
+In order to evaluate the benefits of a data-centric approach in more challenging scenarios, we consider the task of learning $n$-steps Game of Life, which becomes increasingly more complex with the increase of the number of steps $n$.
+In this formulation, the training data is given in the form of pairs $(x,y)$, where $y$ is the state $x$ after $n$ steps of the Game of Life. %, see e.g. Figure~\ref{fig:gol_board_random_0}, \ref{fig:gol_board_random_2} and Figure~\ref{fig:gol_board_fixed_0}, \ref{fig:gol_board_fixed_2} for $n = 2$.
+In this case the multi-step operator $\mathcal{G}_n$ can be represented in either of the following ways:
+\begin{itemize}
+    \item $1$-step network, recursively fed into itself $n$ times, which results in a total of $23$ trainable parameters, see Figure~\ref{fig:gol_model_recursive};
+    \item $n$ instances of the $1$-step network connected sequentially, which results in a total of $23n$ trainable parameters, see Figure~\ref{fig:gol_model_sequential}.
+\end{itemize}
+In our numerical experiments we consider both options.
+We also note that in this paper we only consider $1$- and $2$-step formulations of Game of Life learning, since for $n \ge 3$ none of the learning configurations managed to learn the environment regardless of the choices of initialization, optimization algorithm, and hyperparameters.
+This is due to the constrained nature of our setting as we are only considering networks of minimal architecture.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Training Data Design}
+A conventional way of obtaining training data for a classification task typically involves generating a sufficiently large number of pairs $(x,y)$ via the methods appropriate for the current scenario~\cite{roh2019survey}.
+In the case of $n$-step Game of Life, $x$ represents the initial state and $y$ represents the same state after $n$ steps.
+In practice, such a dataset can be obtained by fixing some initial states and computing the corresponding outputs.
+
+A state in Game of Life is represented by a \textit{board}~--- a $2$-dimensional binary matrix where a value of $0$/$1$ represents a dead/alive cell respectively~--- and a training set is given as a collection of boards.
+When constructing a training set, one has to decide on the number of training boards, size of each board, and an average board \textit{density}~--- the percentage of alive cells on the board.
+Below we explain the choice of these parameters for each of two datasets we use in this paper: the "random" dataset and the "fixed" dataset.
+
+\subsubsection{Random Dataset.}
+While there are multiple viable choices for each of these parameters, in the interest of being consistent with the existing literature, we replicate the data collection choices employed in~\cite{springer2021s}.
+Specifically, we implement a data generator to randomly sample boards with an average density of $38\%$, as such a density minimizes the distribution shift between the inputs and outputs, see Figure~\ref{fig:gol_board_density}, and also maximizes the learning success rate, see~\cite[Section 3.4]{springer2021s}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.89\linewidth]{./images/gol_board_density.png}
+    \caption{Average board density after multiple steps of the Game of Life.}
+    \label{fig:gol_board_density}
+\end{figure}
+
+The size of each training board is set to $64 \times 64$ to match the size of our manually designed training board.
+In order to mitigate the risk of learning on a poorly generated board, we sample a new training board on each iteration of the algorithm when training on the "random" dataset.
+An example of the generated training board is presented in Figure~\ref{fig:gol_board_random}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.78\linewidth]{./images/gol_board_random_0.png}
+    \caption{Example of a generated training board.}
+    \label{fig:gol_board_random}
+\end{figure}
+
+
+\subsubsection{Fixed Dataset.}
+A comprehensive answer on the most appropriate training dataset design is highly application-specific and is yet to be found in general.
+In the context of Game of Life, the main challenges are the redundancy of the patterns in random board that dilute the knowledge and the undecidability of the state dynamics.
+To address these challenges, we utilize two main concepts in the process of board construction: \textit{symmetry} and \textit{patterns}.
+
+As it follows from the rules~\eqref{eq:gol_rules}, in order to make a prediction on the condition of the current state, one does not have to distinguish the neighboring cells; thus, one can deduce that the filters of the first layer should be symmetric about the center.
+However, it is non-trivial to promote such behavior by utilizing a randomly sampled dataset.
+To endorse the symmetric structure of the convolutional filters, we make our board symmetric by performing horizontal and vertical reflections.
+Such an arrangement essentially means that each $3 \times 3$ patch is seen by the network $4$ times with different orientations, thus promoting symmetry of the filters.
+
+It is evident that the training data must contain a variety of $3 \times 3$ patches from which the rules~\eqref{eq:gol_rules} can be learned.
+While considering every possible $3 \times 3$ patch is hardly feasible, as it results in $2^9 = 512$ different configurations, it is also not necessary, as most of them are redundant due to the indistinguishability of the neighbors and the symmetry of the filters.
+As such, one can prioritize putting the more important patterns in the training board and thereby avoid excessive redundancy, which is the approach we pursue.
+Some of the patterns we use are presented in Figure~\ref{fig:gol_patterns}.
+
+To accommodate the above concepts, we first construct a $32 \times 32$ board that contains the critical patterns, and then reflect it horizontally and vertically to harness the power of symmetry, which results in a $64 \times 64$ board.
+Note that the reflection of the board automatically creates additional patterns that are not explicitly included in the original $32 \times 32$ board, which allows us to keep the board size relatively small.
+The constructed board that we use in our numerical examples is presented in Figure~\ref{fig:gol_board_fixed}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.78\linewidth]{./images/gol_board_fixed_0.png}
+    \caption{Manually constructed training board.}
+    \label{fig:gol_board_fixed}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_0.png}
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_1.png}
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_2.png}
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_3.png}
+    \\
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_4.png}
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_5.png}
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_6.png}
+    \includegraphics[width=.2\linewidth]{./images/gol_pattern_7.png}
+    \caption{Examples of patterns utilized in construction of the "fixed" training board for the Game of Life.}
+    \label{fig:gol_patterns}
+\end{figure}
+
+
+% \begin{figure*}[t]
+%     \centering
+%     \begin{subfigure}{.3\linewidth}
+%         \includegraphics[width=\linewidth]{./images/gol_board_random_0.png}
+%         \caption{Input state}
+%         \label{fig:gol_board_random_0}
+%     \end{subfigure}
+%     \begin{subfigure}{.3\linewidth}
+%         \includegraphics[width=\linewidth]{./images/gol_board_random_1.png}
+%         \caption{State after $1$ step}
+%         \label{fig:gol_board_random_1}
+%     \end{subfigure}
+%     \begin{subfigure}{.3\linewidth}
+%         \includegraphics[width=\linewidth]{./images/gol_board_random_2.png}
+%         \caption{State after $2$ steps}
+%         \label{fig:gol_board_random_2}
+%     \end{subfigure}
+%     \caption{Example of a generated training board for the Game of Life.}
+%     \label{fig:gol_board_random}
+% \end{figure*}
+
+% \begin{figure*}[t]
+%     \centering
+%     \begin{subfigure}{.3\linewidth}
+%         \includegraphics[width=\linewidth]{./images/gol_board_fixed_0.png}
+%         \caption{Input state}
+%         \label{fig:gol_board_fixed_0}
+%     \end{subfigure}
+%     \begin{subfigure}{.3\linewidth}
+%         \includegraphics[width=\linewidth]{./images/gol_board_fixed_1.png}
+%         \caption{State after $1$ step}
+%         \label{fig:gol_board_fixed_1}
+%     \end{subfigure}
+%     \begin{subfigure}{.3\linewidth}
+%         \includegraphics[width=\linewidth]{./images/gol_board_fixed_2.png}
+%         \caption{State after $2$ steps}
+%         \label{fig:gol_board_fixed_2}
+%     \end{subfigure}
+%     \caption{Manually constructed training board for the Game of Life. \clr{(x13g3)}}
+%     \label{fig:gol_board_fixed}
+% \end{figure*}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=.49\linewidth]{./images/success_1_recursive_tanh.png}
+    \includegraphics[width=.49\linewidth]{./images/success_1_recursive_relu.png}
+    \caption{Success rates on 1-step Game of Life for networks with Tanh (left) / ReLU (right) activations.}
+    \label{fig:1_step_success}
+\end{figure*}
+
+\begin{table*}[t]
+    \centering\fontsize{8}{9.6}\selectfont
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        & \multicolumn{3}{c}{Success rate} & \multicolumn{3}{c}{Number of epochs}
+        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        algorithm & random & fixed & change & random & fixed & change
+        \\\midrule
+        Adadelta & 0.61 & 0.85 & +39\% & 7449 & 5022 & +33\%
+        \\
+        Adafactor & 0.92 & 0.69 & -25\% & 2403 & 2590 & -8\%
+        \\
+        Adagrad & 0.59 & 0.90 & +53\% & 2366 & 1174 & +50\%
+        \\
+        Adam & 0.89 & 0.96 & +8\% & 402 & 966 & -140\%
+        \\
+        AdamW & 0.89 & 0.99 & +11\% & 313 & 8992 & -2771\%
+        \\
+        Adamax & 0.86 & 0.96 & +12\% & 294 & 3078 & -946\%
+        \\
+        Ftrl & 0.47 & 0.56 & +19\% & 6992 & 1112 & +84\%
+        \\
+        Nadam & 0.77 & 0.91 & +18\% & 2119 & 1665 & +21\%
+        \\
+        RMSprop & 0.89 & 0.82 & -8\% & 2414 & 747 & +69\%
+        \\
+        SGD & 0.60 & 0.95 & +58\% & 866 & 1420 & -64\%
+        \\\bottomrule
+    \end{tabular}
+    \hfill
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        & \multicolumn{3}{c}{Success rate} & \multicolumn{3}{c}{Number of epochs}
+        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        algorithm & random & fixed & change & random & fixed & change
+        \\\midrule
+        Adadelta & 0.16 & 0.22 & +38\% & 5425 & 4657 & +14\%
+        \\
+        Adafactor & 0.03 & 0.06 & +100\% & 3530 & 5127 & -45\%
+        \\
+        Adagrad & 0.18 & 0.20 & +11\% & 655 & 1176 & -79\%
+        \\
+        Adam & 0.24 & 0.25 & +4\% & 1608 & 830 & +48\%
+        \\
+        AdamW & 0.21 & 0.24 & +14\% & 4975 & 714 & +86\%
+        \\
+        Adamax & 0.11 & 0.24 & +118\% & 7384 & 807 & +89\%
+        \\
+        Ftrl & 0.03 & 0.06 & +100\% & 2835 & 1380 & +51\%
+        \\
+        Nadam & 0.21 & 0.24 & +14\% & 3869 & 2310 & +40\%
+        \\
+        RMSprop & 0.23 & 0.28 & +22\% & 633 & 9718 & -1436\%
+        \\
+        SGD & 0.15 & 0.29 & +93\% & 2470 & 1570 & +36\%
+        \\\bottomrule
+    \end{tabular}
+    \caption{Results on 1-step Game of Life for networks with Tanh (left) / ReLU (right) activations.}
+    \label{tab:1_step}
+\end{table*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Numerical Experiments}\label{sec:numerics}
+Our experiments are performed in \texttt{Python~3.8} on a personal laptop.
+Training of all the neural networks is done in \texttt{TensorFlow~2.12}.
+The source code reproducing the presented experiments is provided in Supplementary Materials.
+
+In this section we provide an extensive quantitative analysis to showcase the advantage of a data-centric approach.
+To this end, we employ all available optimization methods currently implemented in \texttt{Tensorflow~2.12}.
+Specifically, we deploy the following optimization algorithms: \texttt{Adadelta}~\cite{zeiler2012adadelta}, \texttt{Adafactor}~\cite{shazeer2018adafactor}, \texttt{Adagrad}~\cite{duchi2011adaptive}, \texttt{Adam} and \texttt{Adamax}~\cite{kingma2014adam}, \texttt{AdamW}~\cite{loshchilov2017decoupled}, \texttt{Ftrl}~\cite{mcmahan2013ad}, \texttt{Nadam}~\cite{dozat2016incorporating}, \texttt{RMSprop}~\cite{hinton2012neural}, and \texttt{SGD} with momentum~\cite{sutskever2013importance}.
+The details for each algorithm and the exact values of the hyperparameters are given in Appendix in Supplementary Materials.
+
+In the presented experiments, for each environment and algorithm we perform $100$ learning simulations.
+Each simulation consists of deploying an algorithm to train a neural network by minimizing the mean square loss on the provided training set~--- either a sequence of randomly generated boards or a single fixed board.
+Each training session is run for $10,000$ epoches, which for our environments we found to be sufficient for an algorithm to either converge or plateau.
+All the algorithms are evaluated on the same test set consisting of $100$ randomly generated $100 \times 100$ boards and their corresponding states after $n$ steps of Game of Life.
+A simulation is considered successful if the network's prediction accuracy on the test set achieves $100\%$.
+
+For each algorithm we measure the percentage of successful simulations and the average number of epoches required to learn the environment.
+In order to evaluate the advantage of this data-centric approach over the conventional ones, for each experiment we report the relative change in \textit{success} (given by the number of successful simulations) and \textit{efficacy} (given by the average number of epoches required to reach convergence).
+
+
+\subsubsection{1-step Game of Life.}
+The results of learning $1$-step Game of Life are presented in Figure~\ref{fig:1_step_success} and Table~\ref{tab:1_step}.
+
+
+\subsubsection{2-step Game of Life with Recursive Networks.}
+The results of learning $2$-step Game of Life with recursive (see Figure~\ref{fig:gol_model_recursive}) networks are presented in Figure~\ref{fig:2_step_success_rec} and Table~\ref{tab:2_step_rec}.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=.49\linewidth]{./images/success_2_recursive_tanh.png}
+    \includegraphics[width=.49\linewidth]{./images/success_2_recursive_relu.png}
+    \caption{Success rates on 2-step Game of Life with recursive networks with Tanh (left) / ReLU (right) activations.}
+    \label{fig:2_step_success_rec}
+\end{figure*}
+
+\begin{table*}[t]
+    \centering\fontsize{8}{9.6}\selectfont
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        & \multicolumn{3}{c}{Success rate} & \multicolumn{3}{c}{Number of epochs}
+        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        algorithm & random & fixed & change & random & fixed & change
+        \\\midrule
+        Adadelta & --- & 0.19 & --- & --- & 9598 & ---
+        \\
+        Adafactor & --- & 0.52 & --- & --- & 6839 & ---
+        \\
+        Adagrad & 0.14 & 0.36 & +157\% & 9649 & 9134 & +5\%
+        \\
+        Adam & 0.44 & 0.81 & +84\% & 7753 & 4472 & +42\%
+        \\
+        AdamW & 0.43 & 0.72 & +67\% & 9547 & 3906 & +59\%
+        \\
+        Adamax & 0.47 & 0.78 & +66\% & 3935 & 5984 & -52\%
+        \\
+        Ftrl & --- & 0.26 & --- & --- & 9794 & ---
+        \\
+        Nadam & 0.46 & 0.82 & +78\% & 8441 & 7261 & +14\%
+        \\
+        RMSprop & 0.26 & 0.69 & +165\% & 9985 & 9981 & +0\%
+        \\
+        SGD & --- & 0.42 & --- & --- & 8535 & ---
+        \\\bottomrule
+    \end{tabular}
+    \hfill
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        & \multicolumn{3}{c}{Success rate} & \multicolumn{3}{c}{Number of epochs}
+        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        algorithm & random & fixed & change & random & fixed & change
+        \\\midrule
+        Adadelta & --- & 0.08 & --- & --- & 7425 & ---
+        \\
+        Adafactor & --- & 0.21 & --- & --- & 9119 & ---
+        \\
+        Adagrad & 0.05 & 0.20 & +300\% & 6023 & 5917 & +2\%
+        \\
+        Adam & 0.08 & 0.25 & +212\% & 5693 & 7399 & -30\%
+        \\
+        AdamW & 0.08 & 0.26 & +225\% & 7718 & 2803 & +64\%
+        \\
+        Adamax & 0.05 & 0.28 & +460\% & 3318 & 5536 & -67\%
+        \\
+        Ftrl & --- & 0.03 & --- & --- & 7947 & ---
+        \\
+        Nadam & 0.08 & 0.30 & +275\% & 5524 & 7653 & -39\%
+        \\
+        RMSprop & 0.06 & 0.25 & +317\% & 9845 & 7151 & +27\%
+        \\
+        SGD & --- & 0.01 & --- & --- & 4349 & ---
+        \\\bottomrule
+    \end{tabular}
+    \caption{Results on 2-step Game of Life with recursive network and Tanh (left) / ReLU (right) activations.}
+    \label{tab:2_step_rec}
+\end{table*}
+
+
+\subsubsection{2-step Game of Life with Sequential Networks.}
+The results of learning $2$-step Game of Life with sequential (see Figure~\ref{fig:gol_model_sequential}) networks are presented in Figure~\ref{fig:2_step_success_seq} and Table~\ref{tab:2_step_seq}.
+
+\begin{figure*}[t!]
+    \centering
+    \includegraphics[width=.49\linewidth]{./images/success_2_sequential_tanh.png}
+    \includegraphics[width=.49\linewidth]{./images/success_2_sequential_relu.png}
+    \caption{Success rates on 2-step Game of Life with sequential networks with Tanh (left) / ReLU (right) activations.}
+    \label{fig:2_step_success_seq}
+\end{figure*}
+
+\begin{table*}[t!]
+    \centering\fontsize{8}{9.6}\selectfont
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        & \multicolumn{3}{c}{Success rate} & \multicolumn{3}{c}{Number of epochs}
+        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        algorithm & random & fixed & change & random & fixed & change
+        \\\midrule
+        Adadelta & --- & --- & --- & --- & --- & ---
+        \\
+        Adafactor & 0.08 & 0.11 & +38\% & 9621 & 8969 & +7\%
+        \\
+        Adagrad & 0.03 & 0.44 & +1367\% & 9640 & 6703 & +30\%
+        \\
+        Adam & 0.15 & 0.68 & +353\% & 7994 & 7122 & +11\%
+        \\
+        AdamW & 0.18 & 0.77 & +328\% & 8076 & 4113 & +49\%
+        \\
+        Adamax & 0.15 & 0.68 & +353\% & 7151 & 3536 & +51\%
+        \\
+        Ftrl & --- & 0.04 & --- & --- & 9173 & ---
+        \\
+        Nadam & 0.14 & 0.56 & +300\% & 7976 & 6811 & +15\%
+        \\
+        RMSprop & 0.13 & 0.31 & +138\% & 9989 & 9270 & +7\%
+        \\
+        SGD & --- & 0.13 & --- & --- & 9637 & ---
+        \\\bottomrule
+    \end{tabular}
+    \hfill
+    \begin{tabular}{lrrrrrr}
+        \toprule
+        & \multicolumn{3}{c}{Success rate} & \multicolumn{3}{c}{Number of epochs}
+        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        algorithm & random & fixed & change & random & fixed & change
+        \\\midrule
+        Adadelta & --- & --- & --- & --- & --- & ---
+        \\
+        Adafactor & --- & --- & --- & --- & --- & ---
+        \\
+        Adagrad & 0.01 & 0.04 & +300\% & 7068 & 7767 & -10\%
+        \\
+        Adam & 0.02 & 0.02 & +0\% & 5720 & 5694 & +0\%
+        \\
+        AdamW & 0.02 & 0.05 & +150\% & 8822 & 6780 & +23\%
+        \\
+        Adamax & 0.01 & 0.02 & +100\% & 6080 & 2936 & +52\%
+        \\
+        Ftrl & --- & --- & --- & --- & --- & ---
+        \\
+        Nadam & --- & 0.04 & --- & --- & 7165 & ---
+        \\
+        RMSprop & --- & 0.04 & --- & --- & 5350 & ---
+        \\
+        SGD & --- & --- & --- & --- & --- & ---
+        \\\bottomrule
+    \end{tabular}
+    \caption{Results on 2-step Game of Life with sequential network and Tanh (left) / ReLU (right) activations.}
+    \label{tab:2_step_seq}
+\end{table*}
+
+
+\subsubsection{Discussion.}
+We note that the advantage of designing a fixed training board is not necessarily evident in the 1-step prediction setting, and in some cases results in slower convergence.
+We hypothesize that this is due to the relative simplicity of the environment, where even the conventional approaches perform well.
+However, considering the 2-step prediction settings is where one observes the benefits of using custom designed training data, as is apparent from Figures~\ref{fig:2_step_success_rec}, \ref{fig:2_step_success_seq} and Tables~\ref{tab:2_step_rec}, \ref{tab:2_step_seq}.
+Overall, our results highlight the importance of a data-centric approach on challenging tasks where conventional approaches might not achieve satisfactory performance.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Conclusion.}
+In this work we study the importance of training data for the efficiency of machine learning algorithms in constrained environments, represented by the multi-step Game of Life prediction tasks.
+We observe the advantage of a data-centric approach over its conventional counterpart, which becomes especially evident in more challenging environments.
+Specifically, we demonstrate that training on a single properly-designed data point can be more beneficial than $10,000$ generated data points in terms of both convergence and efficiency.
+Our results suggest the critical role of the data design process, which supports the need for ML practitioners to work with domain experts in real-life applications.
+
+
+% \subsubsection{Limitations and Future Research.}
+% In this paper we focus on learning the Game of Life in the minimal architecture, which posses certain limitations.
+% In particular, we were unable to learn a single instance of $n$-step Game of Life for $n \ge 3$, which is likely due to the \textit{unpredictability} of the state dynamics given by the rules~\eqref{eq:gol_rules}.
+% Exploring ways to overcome this limitation without sacrificing the minimality is one of the natural future research directions.
+
+% While the presented numerical experiments are performed only on the backpropagation algorithms, we observe the similar behavior on the genetic algorithms~\cite{shapiro2001genetic} and the family of the blackbox optimization algorithms based on Gaussian smoothing~\cite{zhang2020scalable}.
+% For the consistency of presentation we do not report these results in the current work.
+
+% We consider the canonical formulation of Conway's Game of Life to act as a benchmarking environment.
+% It would be of interest to replicate our findings on other versions or generalizations, or other cellular automaton games, e.g.~\cite{peper2010variations}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{references}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\appendix
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hyperparameter Search}\label{sec:algorithms}
+For each algorithm and environment we perform an extensive hyperparameter search to find the appropriate value of the learning rate $\lambda$.
+Specifically, we perform an exhaustive grid search over the values
+\[
+    \lambda \in \{\texttt{1e-1}, \texttt{3e-2}, \texttt{1e-2}, \texttt{3e-3},
+    \texttt{1e-3}, \texttt{3e-4}, \texttt{1e-4}\}
+\]
+by running $100$ tests and measuring their corresponding convergence rates.
+In the case of a tie, the smaller learning rate was used.
+
+We note that, since the random dataset generation is seedable, the hyperparameter search is performed on exactly the same datasets that the algorithms are evaluated on.
+The results of all tests are provided in Figures~\ref{fig:search_1_random}--\ref{fig:search_2_seq_fixed}.
+The value of the learning rate $\lambda$ providing the highest convergence rate is selected for each algorithm/environment pair, see Tables~\ref{tab:search_1_step}, \ref{tab:search_2_step_rec}, and~\ref{tab:search_2_step_seq}, where the entry "\texttt{----}" indicates the absence of successful simulations for any of the values of $\lambda$.
+
+\vspace*{4in}
+
+\begin{table}[h]
+    \centering\small
+    \begin{tabular}{lrrrr}
+        \toprule
+        & \multicolumn{2}{c}{Random dataset} & \multicolumn{2}{c}{Fixed dataset}
+        \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+        algorithm & relu & tanh & relu & tanh
+        \\\midrule
+        Adadelta & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Adafactor & \texttt{3e-2} & \texttt{1e-2} & \texttt{3e-2} & \texttt{3e-2}
+        \\
+        Adagrad & \texttt{1e-1} & \texttt{3e-2} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Adam & \texttt{1e-3} & \texttt{3e-2} & \texttt{3e-3} & \texttt{3e-2}
+        \\
+        Adamax & \texttt{3e-4} & \texttt{3e-2} & \texttt{1e-2} & \texttt{1e-3}
+        \\
+        AdamW & \texttt{3e-4} & \texttt{1e-2} & \texttt{1e-2} & \texttt{1e-1}
+        \\
+        Ftrl & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Nadam & \texttt{1e-2} & \texttt{1e-3} & \texttt{1e-3} & \texttt{1e-2}
+        \\
+        RMSprop & \texttt{3e-3} & \texttt{3e-2} & \texttt{1e-2} & \texttt{1e-2}
+        \\
+        SGD & \texttt{3e-2} & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1}
+        \\\bottomrule
+    \end{tabular}
+    \caption{Hyperparameters for 1-step Game of Life.}
+    \label{tab:search_1_step}
+\end{table}
+
+\begin{table}[h]
+    \centering\small
+    \begin{tabular}{lrrrr}
+        \toprule
+        & \multicolumn{2}{c}{Random dataset} & \multicolumn{2}{c}{Fixed dataset}
+        \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+        algorithm & relu & tanh & relu & tanh
+        \\\midrule
+        Adadelta & \texttt{----} & \texttt{----} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Adafactor & \texttt{3e-2} & \texttt{3e-2} & \texttt{3e-2} & \texttt{1e-1}
+        \\
+        Adagrad & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Adam & \texttt{1e-3} & \texttt{3e-3} & \texttt{3e-4} & \texttt{1e-3}
+        \\
+        Adamax & \texttt{1e-2} & \texttt{1e-2} & \texttt{1e-3} & \texttt{1e-3}
+        \\
+        AdamW & \texttt{3e-3} & \texttt{1e-2} & \texttt{1e-3} & \texttt{1e-3}
+        \\
+        Ftrl & \texttt{----} & \texttt{----} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Nadam & \texttt{1e-3} & \texttt{3e-3} & \texttt{3e-4} & \texttt{1e-3}
+        \\
+        RMSprop & \texttt{1e-3} & \texttt{3e-3} & \texttt{1e-3} & \texttt{3e-3}
+        \\
+        SGD & \texttt{----} & \texttt{----} & \texttt{1e-1} & \texttt{1e-1}
+        \\\bottomrule
+    \end{tabular}
+    \caption{Hyperparameters for 2-step Game of Life with recursive network.}
+    \label{tab:search_2_step_rec}
+\end{table}
+
+\begin{table}[h]
+    \centering\small
+    \begin{tabular}{lrrrr}
+        \toprule
+        & \multicolumn{2}{c}{Random dataset} & \multicolumn{2}{c}{Fixed dataset}
+        \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+        algorithm & relu & tanh & relu & tanh
+        \\\midrule
+        Adadelta & \texttt{----} & \texttt{----} & \texttt{----} & \texttt{----}
+        \\
+        Adafactor & \texttt{----} & \texttt{1e-1} & \texttt{----} & \texttt{3e-2}
+        \\
+        Adagrad & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1} & \texttt{1e-1}
+        \\
+        Adam & \texttt{1e-3} & \texttt{3e-3} & \texttt{3e-4} & \texttt{3e-3}
+        \\
+        Adamax & \texttt{3e-3} & \texttt{3e-2} & \texttt{3e-3} & \texttt{3e-3}
+        \\
+        AdamW & \texttt{3e-3} & \texttt{3e-3} & \texttt{1e-3} & \texttt{1e-3}
+        \\
+        Ftrl & \texttt{----} & \texttt{----} & \texttt{----} & \texttt{1e-1}
+        \\
+        Nadam & \texttt{----} & \texttt{1e-3} & \texttt{1e-3} & \texttt{1e-3}
+        \\
+        RMSprop & \texttt{----} & \texttt{3e-3} & \texttt{1e-3} & \texttt{1e-3}
+        \\
+        SGD & \texttt{----} & \texttt{----} & \texttt{----} & \texttt{1e-1}
+        \\\bottomrule
+    \end{tabular}
+    \caption{Hyperparameters for 2-step Game of Life with sequential network.}
+    \label{tab:search_2_step_seq}
+\end{table}
+
+
+\clearpage
+\begin{figure*}[ht!]
+    \centering
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_adadelta.png}
+        \caption{Adadelta}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_adafactor.png}
+        \caption{Adafactor}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_adagrad.png}
+        \caption{Adagrad}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_adam.png}
+        \caption{Adam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_adamax.png}
+        \caption{Adamax}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_adamw.png}
+        \caption{AdamW}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_ftrl.png}
+        \caption{Ftrl}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_nadam.png}
+        \caption{Nadam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_rmsprop.png}
+        \caption{RMSprop}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_random_sgd.png}
+        \caption{SGD}
+    \end{subfigure}
+    \caption{Hyperparameter search for random dataset on 1-step Game of Life.}
+    \label{fig:search_1_random}
+\end{figure*}
+
+
+\clearpage
+\begin{figure*}[ht!]
+    \centering
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_adadelta.png}
+        \caption{Adadelta}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_adafactor.png}
+        \caption{Adafactor}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_adagrad.png}
+        \caption{Adagrad}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_adam.png}
+        \caption{Adam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_adamax.png}
+        \caption{Adamax}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_adamw.png}
+        \caption{AdamW}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_ftrl.png}
+        \caption{Ftrl}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_nadam.png}
+        \caption{Nadam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_rmsprop.png}
+        \caption{RMSprop}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_1_step_rec_fixed_sgd.png}
+        \caption{SGD}
+    \end{subfigure}
+    \caption{Hyperparameter search for fixed dataset on 1-step Game of Life.}
+    \label{fig:search_1_fixed}
+\end{figure*}
+
+
+\clearpage
+\begin{figure*}[ht!]
+    \centering
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_adadelta.png}
+        \caption{Adadelta}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_adafactor.png}
+        \caption{Adafactor}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_adagrad.png}
+        \caption{Adagrad}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_adam.png}
+        \caption{Adam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_adamax.png}
+        \caption{Adamax}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_adamw.png}
+        \caption{AdamW}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_ftrl.png}
+        \caption{Ftrl}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_nadam.png}
+        \caption{Nadam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_rmsprop.png}
+        \caption{RMSprop}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_random_sgd.png}
+        \caption{SGD}
+    \end{subfigure}
+    \caption{Hyperparameter search for random dataset on 2-step Game of Life with recursive network.}
+    \label{fig:search_2_rec_random}
+\end{figure*}
+
+
+\clearpage
+\begin{figure*}[ht!]
+    \centering
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_adadelta.png}
+        \caption{Adadelta}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_adafactor.png}
+        \caption{Adafactor}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_adagrad.png}
+        \caption{Adagrad}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_adam.png}
+        \caption{Adam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_adamax.png}
+        \caption{Adamax}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_adamw.png}
+        \caption{AdamW}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_ftrl.png}
+        \caption{Ftrl}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_nadam.png}
+        \caption{Nadam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_rmsprop.png}
+        \caption{RMSprop}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_rec_fixed_sgd.png}
+        \caption{SGD}
+    \end{subfigure}
+    \caption{Hyperparameter search for fixed dataset on 2-step Game of Life with recursive network.}
+    \label{fig:search_2_rec_fixed}
+\end{figure*}
+
+
+\clearpage
+\begin{figure*}[ht!]
+    \centering
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_adadelta.png}
+        \caption{Adadelta}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_adafactor.png}
+        \caption{Adafactor}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_adagrad.png}
+        \caption{Adagrad}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_adam.png}
+        \caption{Adam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_adamax.png}
+        \caption{Adamax}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_adamw.png}
+        \caption{AdamW}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_ftrl.png}
+        \caption{Ftrl}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_nadam.png}
+        \caption{Nadam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_rmsprop.png}
+        \caption{RMSprop}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_random_sgd.png}
+        \caption{SGD}
+    \end{subfigure}
+    \caption{Hyperparameter search for random dataset on 2-step Game of Life with sequential network.}
+    \label{fig:search_2_seq_random}
+\end{figure*}
+
+
+\clearpage
+\begin{figure*}[ht!]
+    \centering
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_adadelta.png}
+        \caption{Adadelta}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_adafactor.png}
+        \caption{Adafactor}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_adagrad.png}
+        \caption{Adagrad}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_adam.png}
+        \caption{Adam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_adamax.png}
+        \caption{Adamax}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_adamw.png}
+        \caption{AdamW}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_ftrl.png}
+        \caption{Ftrl}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_nadam.png}
+        \caption{Nadam}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_rmsprop.png}
+        \caption{RMSprop}
+    \end{subfigure}
+    \begin{subfigure}{.49\linewidth}
+        \includegraphics[width=\linewidth]{./images/search/search_2_step_seq_fixed_sgd.png}
+        \caption{SGD}
+    \end{subfigure}
+    \caption{Hyperparameter search for fixed dataset on 2-step Game of Life with sequential network.}
+    \label{fig:search_2_seq_fixed}
+\end{figure*}
+
+
+\end{document}
